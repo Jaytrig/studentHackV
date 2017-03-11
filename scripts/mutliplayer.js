@@ -11,6 +11,8 @@ var smallmapMarker;
 var endpointMarkerMap1;
 var endpointMarkerMap2;
 var point;
+var secondCounter = 0;
+var t;
 var keyMap = {38: false, 40: false, 39: false, 37: false};
 var points = [
 	{
@@ -70,6 +72,10 @@ $(function(){
 	    channels: ['taxigame'],
 	    withPresence: true
 	});
+	function countSeconds(){
+		secondCounter++;
+		$('seconds').text(secondCounter);
+	}
 
 	playerTracking.addListener({
 	    message: function(obj){
@@ -77,11 +83,13 @@ $(function(){
 	    		keyMap = {};
 	    		// display win message on phone screen
 	    		var winnerName = obj.message.name;
-	    		$('#notice').html(winnerName + '<br>WINS!<br>');
-	    		$('#notice').html($('#notice').html() + '<br>NEW GAME!<br>STARTS IN:<br>');
+	    		$('#winnerText').html(winnerName + '<br>WINS!<br>');
+	    		$('#winnerText').html($('#notice').html() + '<br>NEW GAME!<br>STARTS IN:<br>');
 	    		$('#notice').show();
+	    		t=setInterval(countSeconds,1000);
 				setTimeout(function(){
 					$('#notice').hide();
+					clearInterval(t);
 					reload();
 				}, 8000);
 	    	}
