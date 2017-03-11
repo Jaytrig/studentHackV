@@ -6,6 +6,9 @@ var playerSmallMarkers =[];
 var userId;
 var name;
 var map2;
+var smallmapMarker;
+var endpointMarkerMap1;
+var endpointMarkerMap2;
 var point;
 var points = [
 	{
@@ -20,6 +23,19 @@ var points = [
 		// endPoint : [-73.985100, 40.747811]
 	}
 ]
+
+function reload(){
+  $.ajax({
+  url: "./getpoint"
+  }).done(function(data) {
+    map.setCenter(points[point].startPoints);
+    map2.setCenter(points[point].startPoints);
+
+    smallmapMarker.setLngLat(points[point].startPoints);
+    endpointMarkerMap1.setLngLat(points[point].endPoint);
+    endpointMarkerMap2.setLngLat(points[point].endPoint);
+  });
+}
 
 $(function(){
 	$('#join').click(function(){
@@ -46,6 +62,7 @@ $(function(){
 	    		var winnerName = obj.message.name;
 	    		$('#notice').html(winnerName + '<br>WINS!<br>');
 	    		$('#notice').html($('#notice').html + '<br>NEW GAME!<br>STARTS IN:<br>');
+					reload();
 	    	}
 	    	if(userId !== obj.publisher){
 		    	var newCenter = [obj.message.lng, obj.message.lat];

@@ -53,15 +53,15 @@
   endMarker2.style.backgroundRepeat= 'no-repeat';
   endMarker2.style.backgroundPosition= 'center center';
 
-  var endpointMarkerMap2 = new mapboxgl.Marker(endMarker2)
+  endpointMarkerMap2 = new mapboxgl.Marker(endMarker2)
                             .setLngLat(points[point].endPoint)
                             .addTo(map2);
 
-  var endpointMarkerMap1 = new mapboxgl.Marker(endMarker1)
+  endpointMarkerMap1 = new mapboxgl.Marker(endMarker1)
                             .setLngLat(points[point].endPoint)
                             .addTo(map);
 
-  var smallmapMarker = new mapboxgl.Marker(el)
+  smallmapMarker = new mapboxgl.Marker(el)
                             .setLngLat(points[point].startPoints)
                             .addTo(map2);
 
@@ -235,14 +235,13 @@
             $.ajax({
             url: "./nextpoint"
             }).done(function(){
-               alert('Somebody won!');
-               window.location.reload();
+               endMarker1.style.backgroundImage = "url('./img/little_man_happy.png')";
+               playerTracking.publish({
+                   channel: 'taxigame',
+                   message: {"name":name, "type":"win" }
+               });
             });
-            endMarker1.style.backgroundImage = "url('./img/little_man_happy.png')";
-            playerTracking.publish({
-                channel: 'taxigame',
-                message: {"name":name,"lng":newCenter.lng,"lat":newCenter.lat,"type":"win" }
-            });
+
 
           }
         }
@@ -259,17 +258,3 @@
 
   });
 })();
-
-
-function reload(){
-  $.ajax({
-  url: "./getpoint"
-  }).done(function(data) {
-    map.setCenter(points[point].startPoints);
-    map2.setCenter(points[point].startPoints);
-
-    smallmapMarker.setLngLat(points[point].startPoints);
-    endpointMarkerMap1.setLngLat(points[point].endPoint);
-    endpointMarkerMap2.setLngLat(points[point].endPoint);
-  });
-}
