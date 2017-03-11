@@ -10,6 +10,7 @@ var smallmapMarker;
 var endpointMarkerMap1;
 var endpointMarkerMap2;
 var point;
+var keyMap = {38: false, 40: false, 39: false, 37: false};
 var points = [
 	{
 		name : 'Manchester',
