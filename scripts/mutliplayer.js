@@ -14,6 +14,7 @@ var point;
 var secondCounter = 0;
 var t;
 var keyMap = {38: false, 40: false, 39: false, 37: false};
+var winner = false;
 var points = [
 {
 	name : 'Manchester',
@@ -48,6 +49,7 @@ function reload(newPoint){
 
 	var d = distanceTwoPoints(points[newPoint].startPoints[1], points[newPoint].startPoints[0], points[newPoint].endPoint[1], points[newPoint].endPoint[0]);
 	$('#distanceTag').text(d +' KM Left '+ points[newPoint].name);
+	winner = false;
 }
 
 $(function(){
