@@ -105,7 +105,11 @@ $(function(){
 	    		players[obj.publisher] = newCenter;
 	    		if(playerMarkers[obj.publisher] == undefined){
 	    			var el = document.createElement('div');
+	    			var popup = document.createElement('h4');
+	    			popup.innerHTML = 'HO';
+	    			popup.className = 'popupClass';
 	    			el.className = 'markerCar';
+	    			el.body.appendChild(popup); 
 
 	    			
 	    			var playerMarker = new mapboxgl.Marker(el)
