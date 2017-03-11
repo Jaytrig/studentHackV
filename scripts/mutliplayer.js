@@ -91,7 +91,7 @@ $(function(){
 	    			reload();
 	    		}, 8000);
 	    	}
-	    	if(userId !== obj.publisher){
+	    	if(userId !== parseInt(obj.publisher)){
 	    		var newCenter = [obj.message.lng, obj.message.lat];
 	    		players[obj.publisher] = newCenter;
 	    		if(playerMarkers[obj.publisher] == undefined){
