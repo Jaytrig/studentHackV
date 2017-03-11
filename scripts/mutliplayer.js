@@ -83,7 +83,7 @@ $(function(){
 	    		// display win message on phone screen
 	    		var winnerName = obj.message.name;
 	    		$('#winnerText').html(winnerName + '<br>WINS!<br>');
-	    		$('#winnerText').html($('#notice').html() + '<br>NEW GAME!<br>STARTS IN:<br>');
+	    		$('#winnerText').html($('#notice').html() + '<br>NEW GAME<br>STARTS SOON!<br>');
 	    		$('#notice').show();
 	    		setTimeout(function(){
 	    			$('#notice').hide();

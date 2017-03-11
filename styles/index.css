@@ -101,3 +101,6 @@ body {
   color: #000;
   display: none;
 }
+#winner{
+  line-height: 100%;
+}
