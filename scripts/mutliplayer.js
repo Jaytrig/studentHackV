@@ -55,13 +55,20 @@ function reload(){
 }
 
 $(function(){
+		toastr.options = {
+            "positionClass": "toast-top-left"
+        };
 		userId = Math.ceil((Math.random() * 100000000));
 
 		$('#join').click(function(){
 			name = $('#username').val();
-			if(name === '') name = 'user';
+			if(name === '') name = 'User' + userId;
 			$('#login').hide();
 			map.getCanvas().focus();
+			 playerTracking.publish({
+                channel: 'taxigame',
+                message: {"name":name,"type":"join"}
+        	});
 		});
 
 
@@ -78,8 +85,8 @@ $(function(){
 
 		playerTracking.addListener({
 			message: function(obj){
-				if(obj.message.type === 'win'){
-					keyMap = {};
+			if(obj.message.type === 'win'){
+				keyMap = {};
 	    		// display win message on phone screen
 	    		var winnerName = obj.message.name;
 	    		$('#winnerText').html(winnerName + '<br>WINS!<br>');
@@ -89,6 +96,11 @@ $(function(){
 	    			$('#notice').hide();
 	    			reload();
 	    		}, 8000);
+	    		return false;
+	    	}
+	    	if(obj.message.type === 'join'){
+	    		toastr.success(obj.message.name + ' Has Joined!');
+	    		return false;
 	    	}
 	    	if(userId !== parseInt(obj.publisher)){
 	    		var newCenter = [obj.message.lng, obj.message.lat];
