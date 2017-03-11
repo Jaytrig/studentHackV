@@ -9,7 +9,10 @@ var map2;
 $(function(){
 	$('#join').click(function(){
 		name = $('#username').val();
+		if(name !== '') name = 'user';
     	userId = name + Math.ceil((Math.random() * 100000));
+    	$('#login').hide();
+    	map.getCanvas().focus();
     	playerTracking = new PubNub({
 			    publishKey: 'pub-c-bdf8080e-74cc-4302-86b0-2de8ada8fdd9',
 			    subscribeKey: 'sub-c-8882bb02-0648-11e7-89e8-02ee2ddab7fe',

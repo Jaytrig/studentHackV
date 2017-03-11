@@ -147,7 +147,7 @@
        var keyMap = {38: false, 40: false, 39: false, 37: false};
 
       map.on('load', function() {
-          map.getCanvas().focus();
+          
 
           map.getCanvas().addEventListener('keydown', function(e) {
               e.preventDefault();
@@ -155,12 +155,7 @@
               if (e.keyCode in keyMap) {
                   keyMap[e.keyCode] = true;
                   if (keyMap[38] && keyMap[37]) {
-                      var center = map.getCenter();
-                      map.easeTo({
-                          bearing: map.getBearing() - deltaDegrees,
-                          center: [center.lng-0.00004,center.lat],
-                          easing: easing
-                      });
+                     
                   }
                   else if (keyMap[38] && keyMap[39]) {
                       // UP RIGTH
