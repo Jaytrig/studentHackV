@@ -18,7 +18,7 @@ app.get('/getpoint', function (req, res) {
 app.get('/nextpoint', function (req, res) {
 
   point += 1;
-  if(point > 1){
+  if(point > 2){
     point = 0;
   }
 
