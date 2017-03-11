@@ -259,3 +259,17 @@
 
   });
 })();
+
+
+function reload(){
+  $.ajax({
+  url: "./getpoint"
+  }).done(function(data) {
+    map.setCenter(points[point].startPoints);
+    map2.setCenter(points[point].startPoints);
+
+    smallmapMarker.setLngLat(points[point].startPoints);
+    endpointMarkerMap1.setLngLat(points[point].endPoint);
+    endpointMarkerMap2.setLngLat(points[point].endPoint);
+  });
+}
