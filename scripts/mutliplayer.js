@@ -23,7 +23,8 @@ var points = [
 {
 	name : 'New York',
 	startPoints : [ -73.990157, 40.732288],
-	endPoint : [-73.985100, 40.747811]
+	// endPoint : [-73.985100, 40.747811]
+	endPoint : [ -73.990157, 40.732388]
 }
 	]
 	function distanceTwoPoints(lat1, lon1, lat2, lon2) {
@@ -89,8 +90,7 @@ $(function(){
 				keyMap = {};
 	    		// display win message on phone screen
 	    		var winnerName = obj.message.name;
-	    		$('#winnerText').html(winnerName + '<br>WINS!<br>');
-	    		$('#winnerText').html($('#notice').html() + '<br>NEW GAME<br>STARTS SOON!<br>');
+	    		$('#winnerText').html(winnerName + '<br>WINS!<br>NEW GAME<br>STARTS SOON!<br>');
 	    		$('#notice').show();
 	    		setTimeout(function(){
 	    			$('#notice').hide();
