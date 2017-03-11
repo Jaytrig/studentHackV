@@ -1,7 +1,7 @@
 (function() {
   mapboxgl.accessToken = 'pk.eyJ1IjoibW9ydG9uZXkiLCJhIjoiY2owNGoxZm9pMDBiYzJxbmxiM2p2cG4zYSJ9.Nhvw9Lp7DZ0gXHAcoCvqiQ';
 
-  var map = new mapboxgl.Map({
+  map = new mapboxgl.Map({
       style: 'mapbox://styles/mortoney/cj050mkjg00cf2snyrp55bjxq',
       center: [-2.23834, 53.4760],
       zoom: 19,
@@ -176,6 +176,7 @@
                      deltaDistance=30;
                   }
               }
+              publishMove(map.getCenter());
           }, true);
 
           map.getCanvas().addEventListener('keyup', function(e) {
@@ -187,4 +188,10 @@
           }, true);
 
         });
+      function publishMove(newCenter){
+        playerTracking.publish({
+                channel: 'taxigame',
+                message: {"name":"Gini","lng":newCenter.lng,"lat":newCenter.lat,"type":"move" }
+        });
+      }
 })();
