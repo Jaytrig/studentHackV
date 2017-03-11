@@ -15,21 +15,22 @@
     </style>
 </head>
 <body>
-<div style=" position: absolute;
-width: 30px;
-height: 30px;
-z-index: 15;
-top: 50%;
-left: 50%;
-margin: -5px 0 0 -5px;
-background-image: url('/img/SimpleGreenCarTopView.svg');
--webkit-transform: rotate(-90deg);
--moz-transform: rotate(-90deg);
--ms-transform: rotate(-90deg);
--o-transform: rotate(-90deg);
-transform: rotate(-90deg);
-background-repeat: no-repeat;
-background-position: center;
+<div style="
+    position: absolute;
+    width: 24px;
+    height: 41px;
+    z-index: 15;
+    top: 50%;
+    left: 50%;
+    margin: -20.5px 0 0 -12px;
+    background-image: url(/img/car.png);
+    /* -webkit-transform: rotate(-90deg); */
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    /* transform: rotate(-90deg); */
+    /* background-repeat: no-repeat; */
+    background-size: cover;
 ">
 </div>
 <div id='map'></div>
@@ -101,13 +102,14 @@ map.on('load', function() {
     });
 });
 // pixels the map pans when the up or down arrow is clicked
-    var deltaDistance = 50;
+    var deltaDistance = 30;
 
     // degrees the map rotates when the left or right arrow is clicked
     var deltaDegrees = 5;
     var onRoad;
-    var dataLeft;
-    var dataRight;
+    var dataLeft =[];
+    var dataRight= [];
+    var dataFront = [];
 
 
     function easing(t) {
@@ -126,7 +128,17 @@ map.on('load', function() {
             console.log(isRoad, !!onRoad);
             dataLeft = [];
             dataRight = [];
+            dataFront = [];
         }else{
+
+            dataFront = numbers.map(function(num) {
+            var front = map.queryRenderedFeatures([(window.innerWidth / 2), (window.innerHeight / 2)+num]);
+            if(front.length !== 0){
+                return front[0].layer['source-layer'].includes('road');
+              }
+          });
+
+
           dataLeft = numbers.map(function(num) {
             var left = map.queryRenderedFeatures([(window.innerWidth / 2) - num, window.innerHeight / 2]);
             if(left.length !== 0){
@@ -147,41 +159,78 @@ map.on('load', function() {
     }
 
 
+     var keyMap = {38: false, 40: false, 39: false, 37: false};
+
     map.on('load', function() {
         map.getCanvas().focus();
 
         map.getCanvas().addEventListener('keydown', function(e) {
             e.preventDefault();
-            if (e.which === 38) { // up
-              deltaDegrees = 5
-              if(!!onRoad || dataRight.includes(true) || dataLeft.includes(true)){
-                map.panBy([0, -deltaDistance], {
+
+            if (e.keyCode in keyMap) {
+                keyMap[e.keyCode] = true;
+                if (keyMap[38] && keyMap[37]) {
+                    var center = map.getCenter();
+                    map.easeTo({
+                        bearing: map.getBearing() - deltaDegrees,
+                        center: [center.lng-0.00004,center.lat],
+                        easing: easing
+                    });
+                }
+                else if (keyMap[38] && keyMap[39]) {
+                    // UP RIGTH
+                }
+                else if (keyMap[40] && keyMap[37]) {
+                    // DOWN LEFT
+                }
+                else if (keyMap[40] && keyMap[39]) {
+                    // DOWN RIGTH
+                }
+                else if (keyMap[40]) {
+                    map.panBy([0, deltaDistance], {
                     easing: easing
-                });
-              }
-            } else if (e.which === 40) { // down
-                map.panBy([0, deltaDistance], {
-                    easing: easing
-                });
-            } else if (e.which === 37) { // left
-                map.easeTo({
-                    bearing: map.getBearing() - deltaDegrees,
-                    easing: easing
-                });
-               deltaDegrees = 20
+                    });
+                    deltaDistance=30;
+                }
+                else if (keyMap[38]) {
+                    deltaDegrees = 5
+
+                    if(!!onRoad || dataRight.includes(true) || dataLeft.includes(true) || dataFront.includes(true)){
+                        map.panBy([0, -deltaDistance], {
+                            easing: easing
+                        });
+                        deltaDistance +=2;
+                     }
+                    
+                }
+                else if (keyMap[37]) {
+                    map.easeTo({
+                        bearing: map.getBearing() - deltaDegrees,
+                        easing: easing
+                    });
+                   deltaDegrees = 25
+                   deltaDistance=30;
+
+                }
+                else if (keyMap[39]) {
+                    map.easeTo({
+                        bearing: map.getBearing() + deltaDegrees,
+                        easing: easing
+                       });
+                   deltaDegrees = 25;
+                   deltaDistance=30;
+                }
             }
-            else if (e.which === 39) { // right
-                map.easeTo({
-                    bearing: map.getBearing() + deltaDegrees,
-                    easing: easing
-                });
-                map2.easeTo({
-                    bearing: map2.getBearing() + deltaDegrees,
-                    easing: easing
-                });
-                deltaDegrees = 20
+        }, true);
+
+        map.getCanvas().addEventListener('keyup', function(e) {
+            e.preventDefault();
+             if (e.keyCode in keyMap) {
+                keyMap[e.keyCode] = false;
             }
-          }, true);
+
+        }, true);
+        
       });
 </script>
 
