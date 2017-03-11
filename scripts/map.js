@@ -21,7 +21,7 @@
 
 
   map2 = new mapboxgl.Map({
-      style: 'mapbox://styles/mapbox/streets-v10',
+      style: 'mapbox://styles/mortoney/cj050mkjg00cf2snyrp55bjxq',
       center: points[point].startPoints,
       zoom: 12,
       bearing: -17.6,
