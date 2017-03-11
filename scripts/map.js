@@ -230,11 +230,12 @@
           if(d, d < 0.01){
             $.ajax({
             url: "./nextpoint"
-            }).done(function(){
+            }).done(function(data){
+               point = data.currentPoint;
                endMarker1.style.backgroundImage = "url('./img/little_man_happy.png')";
                playerTracking.publish({
                    channel: 'taxigame',
-                   message: {"name":name, "type":"win" }
+                   message: {"name":name, "type":"win", "point" : point }
                });
             });
 
