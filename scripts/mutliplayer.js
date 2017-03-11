@@ -23,12 +23,7 @@ $(function(){
 		    	players[obj.publisher] = newCenter;
 		    	if(playerMarkers[obj.publisher] == undefined){
 		    		  var el = document.createElement('div');
-					  el.className = 'marker';
-					  el.style.background = 'red';
-					  el.style.width = '5px';
-					  el.style.height = '5px';
-					  el.style.zIndex = '20';
-
+					  el.className = 'markerCar';
 
 					  var playerMarker = new mapboxgl.Marker(el)
 					                            .setLngLat([newCenter[0], newCenter[1]])

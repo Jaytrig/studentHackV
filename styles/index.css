@@ -44,3 +44,13 @@ body {
 .endMarker2{
   margin: -120px 0 0 -40px
 }
+
+.markerCar {
+  width: 24px;
+  height: 41px;
+  z-index: 20;
+  margin: -20.5px 0 0 -12px;
+  background-image: url('/img/car.png');
+  background-size: cover;
+  opacity: 0.5;
+}
