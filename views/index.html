@@ -147,41 +147,66 @@ map.on('load', function() {
     }
 
 
+     var keyMap = {38: false, 40: false, 39: false, 37: false};
+
     map.on('load', function() {
         map.getCanvas().focus();
 
         map.getCanvas().addEventListener('keydown', function(e) {
             e.preventDefault();
-            if (e.which === 38) { // up
-              deltaDegrees = 5
-              if(!!onRoad || dataRight.includes(true) || dataLeft.includes(true)){
-                map.panBy([0, -deltaDistance], {
+            deltaDegrees = 5;
+            if (e.keyCode in keyMap) {
+                keyMap[e.keyCode] = true;
+                if (keyMap[38] && keyMap[37]) {
+                    var center = map.getCenter();
+                    map.easeTo({
+                        bearing: map.getBearing() - deltaDegrees,
+                        center: [center.lng-0.00004,center.lat],
+                        easing: easing
+                    });
+                }
+                else if (keyMap[38] && keyMap[39]) {
+                    // UP RIGTH
+                }
+                else if (keyMap[40] && keyMap[37]) {
+                    // DOWN LEFT
+                }
+                else if (keyMap[40] && keyMap[39]) {
+                    // DOWN RIGTH
+                }
+                else if (keyMap[40]) {
+                    map.panBy([0, deltaDistance], {
                     easing: easing
-                });
-              }
-            } else if (e.which === 40) { // down
-                map.panBy([0, deltaDistance], {
+                    });
+                }
+                else if (keyMap[38]) {
+                    map.panBy([0, -deltaDistance], {
                     easing: easing
-                });
-            } else if (e.which === 37) { // left
-                map.easeTo({
-                    bearing: map.getBearing() - deltaDegrees,
-                    easing: easing
-                });
-               deltaDegrees = 20
+                    });
+                }
+                else if (keyMap[37]) {
+                    map.easeTo({
+                        bearing: map.getBearing() - deltaDegrees,
+                        easing: easing
+                    });
+                }
+                else if (keyMap[39]) {
+                    map.easeTo({
+                        bearing: map.getBearing() + deltaDegrees,
+                        easing: easing
+                    });
+                }
             }
-            else if (e.which === 39) { // right
-                map.easeTo({
-                    bearing: map.getBearing() + deltaDegrees,
-                    easing: easing
-                });
-                map2.easeTo({
-                    bearing: map2.getBearing() + deltaDegrees,
-                    easing: easing
-                });
-                deltaDegrees = 20
+        }, true);
+
+        map.getCanvas().addEventListener('keyup', function(e) {
+            e.preventDefault();
+             if (e.keyCode in keyMap) {
+                keyMap[e.keyCode] = false;
             }
-          }, true);
+
+        }, true);
+        
       });
 </script>
 
