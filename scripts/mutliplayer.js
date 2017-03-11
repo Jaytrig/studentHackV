@@ -6,6 +6,20 @@ var playerSmallMarkers =[];
 var userId;
 var name;
 var map2;
+var point;
+var points = [
+	{
+		name : 'Manchester',
+		startPoints = [-2.23834, 53.4760],
+		endPoint = [-2.243101, 53.487354]
+	},
+	{
+		name : 'New York',
+		startPoints = [-73.999467,40.712036],
+		endPoint = [-73.985100, 40.747811]
+	}
+]
+
 $(function(){
 	$('#join').click(function(){
 		name = $('#username').val();
@@ -55,14 +69,14 @@ $(function(){
 		    		playerSmallMarkers[obj.publisher].setLngLat([newCenter[0], newCenter[1]]);
 
 		    	}
-		    }    	
+		    }
 	    }
 	});
 
 	playerTracking.hereNow(
 		    {
 		        channels: ["taxigame"]
-		    }, 
+		    },
 		    function (status, response) {
 		    	var allUsersIds = [];
 		    	var usersArr = response.channels["taxigame"].occupants;

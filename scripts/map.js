@@ -1,12 +1,14 @@
 (function() {
+  $.ajax({
+  url: "./getpoint",
+}).done(function(data) {
 
+  point = data['currentPoint'];
   mapboxgl.accessToken = 'pk.eyJ1IjoibW9ydG9uZXkiLCJhIjoiY2owNGoxZm9pMDBiYzJxbmxiM2p2cG4zYSJ9.Nhvw9Lp7DZ0gXHAcoCvqiQ';
-  var startPoints = [-2.23834, 53.4760];
-  // var endPoint = [-2.23834, 53.4760];
-  var endPoint = [-2.243101, 53.487354]
+
   map = new mapboxgl.Map({
         style: 'mapbox://styles/mortoney/cj050mkjg00cf2snyrp55bjxq',
-        center: startPoints,
+        center: points[point].startPoints,
         zoom: 19,
         pitch: 185,
         bearing: -17.6,
@@ -15,12 +17,12 @@
   });
 
   var d = distanceTwoPoints(startPoints[1], startPoints[0], endPoint[1], endPoint[0]);
-  $('#distanceTag').text(d +' KM Left');
+  $('#distanceTag').text(d +' KM Left '+ points[point].name);
 
 
   map2 = new mapboxgl.Map({
       style: 'mapbox://styles/mapbox/streets-v10',
-      center: startPoints,
+      center: points[point].startPoints,
       zoom: 12,
       bearing: -17.6,
       container: 'smallmap',
@@ -52,15 +54,15 @@
   endMarker2.style.backgroundPosition= 'center center';
 
   var endpointMarkerMap2 = new mapboxgl.Marker(endMarker2)
-                            .setLngLat(endPoint)
+                            .setLngLat(points[point].endPoint)
                             .addTo(map2);
 
   var endpointMarkerMap1 = new mapboxgl.Marker(endMarker1)
-                            .setLngLat(endPoint)
+                            .setLngLat(points[point].endPoint)
                             .addTo(map);
 
   var smallmapMarker = new mapboxgl.Marker(el)
-                            .setLngLat(startPoints)
+                            .setLngLat(points[point].startPoints)
                             .addTo(map2);
 
   // the 'building' layer in the mapbox-streets vector source contains building-height
@@ -147,7 +149,7 @@
        var keyMap = {38: false, 40: false, 39: false, 37: false};
 
       map.on('load', function() {
-          
+
 
           map.getCanvas().addEventListener('keydown', function(e) {
               e.preventDefault();
@@ -155,7 +157,7 @@
               if (e.keyCode in keyMap) {
                   keyMap[e.keyCode] = true;
                   if (keyMap[38] && keyMap[37]) {
-                     
+
                   }
                   else if (keyMap[38] && keyMap[39]) {
                       // UP RIGTH
@@ -228,9 +230,14 @@
         function didUserWin(cur){
           var d = distanceTwoPoints(cur.lat.toFixed(6), cur.lng.toFixed(6), endPoint[1], endPoint[0]);
 
-          $('#distanceTag').text(d +' KM Left');
+          $('#distanceTag').text(d +' KM Left '+ points[point].name);
           if(d, d < 0.01){
-            //WIN!
+            $.ajax({
+            url: "./nextpoint",
+            }).done(function(){
+               alert('Somebody won!');
+               window.location.reload();
+            });
           }
         }
 
@@ -244,5 +251,5 @@
           return ((12742 * Math.asin(Math.sqrt(a)))*0.62137).toFixed(2); // 2 * R; R = 6371 km
         }
 
-
+  });
 })();
