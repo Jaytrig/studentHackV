@@ -118,9 +118,9 @@ $(function(){
 					 'left': [markerRadius, (markerHeight - markerRadius) * -1],
 					 'right': [-markerRadius, (markerHeight - markerRadius) * -1]
 					 };
-					var popup = new mapboxgl.Popup(popup);
+					var popup = new mapboxgl.Popup({offset:popupOffsets, , closeOnClick: false});
 					
-	    			var playerMarker = new mapboxgl.Marker(el).Popup({offset:popupOffsets})
+	    			var playerMarker = new mapboxgl.Marker(el).Popup(popup)
 	    			.setLngLat([newCenter[0], newCenter[1]])
 	    			.addTo(map);
 	    			playerMarkers[obj.publisher] = playerMarker;
