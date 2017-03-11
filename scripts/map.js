@@ -232,6 +232,7 @@
 
           $('#distanceTag').text(d +' KM Left '+ points[point].name);
           if(d, d < 0.01){
+            endMarker1.style.backgroundImage = "url('./img/little_man_happy.png')";
             $.ajax({
             url: "./nextpoint",
             }).done(function(){
