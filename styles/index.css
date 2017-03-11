@@ -55,6 +55,9 @@ body {
   background-color: lightgrey;
 }
 
+#marker{
+  border-radius: 50%;
+}
 .endMarker1{
   margin: -30px 0 0 -10px
 }

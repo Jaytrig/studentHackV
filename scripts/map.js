@@ -31,7 +31,7 @@
 
   var el = document.createElement('div');
   el.className = 'marker';
-  el.style.background = 'red';
+  el.style.background = 'yellow';
   el.style.width = '10px';
   el.style.height = '10px';
 
