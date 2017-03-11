@@ -14,7 +14,7 @@
   });
 
 
-  var map2 = new mapboxgl.Map({
+  map2 = new mapboxgl.Map({
       style: 'mapbox://styles/mapbox/streets-v10',
       center: startPoints,
       zoom: 12,

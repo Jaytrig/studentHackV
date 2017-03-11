@@ -2,7 +2,9 @@ var playerTracking;
 var map;
 var players = [];
 var playerMarkers =[];
+var playerSmallMarkers =[];
 var userId = 'gini';
+var map2;
 $(function(){
 
 	playerTracking = new PubNub({
@@ -29,9 +31,22 @@ $(function(){
 					                            .setLngLat([newCenter[0], newCenter[1]])
 					                            .addTo(map);
 					  playerMarkers[obj.publisher] = playerMarker;
+
+					  //Small marker
+					  var el = document.createElement('div');
+					  el.className = 'marker';
+					  el.style.background = 'blue';
+					  el.style.width = '5px';
+					  el.style.height = '5px';
+
+					  var smallPlayerMarker = new mapboxgl.Marker(el)
+					                            .setLngLat([newCenter[0], newCenter[1]])
+					                            .addTo(map2);
+					  playerSmallMarkers[obj.publisher] = smallPlayerMarker;
 		    	}else{
 		    		//find existing marker
 		    		playerMarkers[obj.publisher].setLngLat([newCenter[0], newCenter[1]]);
+		    		playerSmallMarkers[obj.publisher].setLngLat([newCenter[0], newCenter[1]]);
 
 		    	}
 		    }    	
