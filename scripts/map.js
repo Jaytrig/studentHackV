@@ -229,6 +229,7 @@
 
           $('#distanceTag').text(d +' KM Left '+ points[point].name);
           if(parseFloat(d) < 0.01 && !winner){
+            winner = true;
             $.ajax({
             url: "./nextpoint"
             }).done(function(data){
@@ -240,7 +241,7 @@
                });
 
             });
-            winner = true;
+
 
           }
         }
