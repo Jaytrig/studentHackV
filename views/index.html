@@ -106,8 +106,8 @@ map.on('load', function() {
     // degrees the map rotates when the left or right arrow is clicked
     var deltaDegrees = 5;
     var onRoad;
-    var dataLeft;
-    var dataRight;
+    var dataLeft =[];
+    var dataRight= [];
 
 
     function easing(t) {
@@ -154,7 +154,7 @@ map.on('load', function() {
 
         map.getCanvas().addEventListener('keydown', function(e) {
             e.preventDefault();
-            deltaDegrees = 5;
+
             if (e.keyCode in keyMap) {
                 keyMap[e.keyCode] = true;
                 if (keyMap[38] && keyMap[37]) {
@@ -180,21 +180,29 @@ map.on('load', function() {
                     });
                 }
                 else if (keyMap[38]) {
-                    map.panBy([0, -deltaDistance], {
-                    easing: easing
-                    });
+                    deltaDegrees = 5
+
+                    if(!!onRoad || dataRight.includes(true) || dataLeft.includes(true)){
+                        map.panBy([0, -deltaDistance], {
+                            easing: easing
+                        });
+                     }
+                    
                 }
                 else if (keyMap[37]) {
                     map.easeTo({
                         bearing: map.getBearing() - deltaDegrees,
                         easing: easing
                     });
+                   deltaDegrees = 25
+
                 }
                 else if (keyMap[39]) {
                     map.easeTo({
                         bearing: map.getBearing() + deltaDegrees,
                         easing: easing
-                    });
+                       });
+                   deltaDegrees = 25;
                 }
             }
         }, true);
