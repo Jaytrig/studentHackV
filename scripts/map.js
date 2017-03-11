@@ -238,9 +238,9 @@
                    channel: 'taxigame',
                    message: {"name":name, "type":"win", "point" : point }
                });
-               winner = true;
-            });
 
+            });
+            winner = true;
 
           }
         }
