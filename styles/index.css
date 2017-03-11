@@ -1,19 +1,15 @@
 #car {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 41px;
   z-index: 15;
   top: 50%;
   left: 50%;
-  margin: -5px 0 0 -5px;
-  background-image: url('/img/SimpleGreenCarTopView.svg');
-  -webkit-transform: rotate(-90deg);
-  -moz-transform: rotate(-90deg);
-  -ms-transform: rotate(-90deg);
-  -o-transform: rotate(-90deg);
-  transform: rotate(-90deg);
-  background-repeat: no-repeat;
-  background-position: center;
+  margin: -20.5px 0 0 -12px;
+  background-image: url('/img/car.png');
+
+  background-size: cover;
+
 }
 
 .roads {
