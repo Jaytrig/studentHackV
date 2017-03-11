@@ -3,11 +3,14 @@ var map;
 var players = [];
 var playerMarkers =[];
 var playerSmallMarkers =[];
-var userId = 'gini';
+var userId;
+var name;
 var map2;
 $(function(){
-
-	playerTracking = new PubNub({
+	$('#join').click(function(){
+		name = $('#username').val();
+    	userId = name + Math.ceil((Math.random() * 100000));
+    	playerTracking = new PubNub({
 			    publishKey: 'pub-c-bdf8080e-74cc-4302-86b0-2de8ada8fdd9',
 			    subscribeKey: 'sub-c-8882bb02-0648-11e7-89e8-02ee2ddab7fe',
 			    uuid: userId
@@ -65,4 +68,5 @@ $(function(){
 		    	}
 		    }
 		);
+  	});
 });

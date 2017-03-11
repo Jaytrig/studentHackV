@@ -1,4 +1,5 @@
 (function() {
+
   mapboxgl.accessToken = 'pk.eyJ1IjoibW9ydG9uZXkiLCJhIjoiY2owNGoxZm9pMDBiYzJxbmxiM2p2cG4zYSJ9.Nhvw9Lp7DZ0gXHAcoCvqiQ';
   var startPoints = [-2.23834, 53.4760];
   // var endPoint = [-2.23834, 53.4760];
@@ -225,7 +226,7 @@
       function publishMove(newCenter){
         playerTracking.publish({
                 channel: 'taxigame',
-                message: {"name":"Gini","lng":newCenter.lng,"lat":newCenter.lat,"type":"move" }
+                message: {"name":name,"lng":newCenter.lng,"lat":newCenter.lat,"type":"move" }
         });
       }
 
