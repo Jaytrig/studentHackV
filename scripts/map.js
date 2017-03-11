@@ -35,7 +35,7 @@
   el.style.width = '5px';
   el.style.height = '5px';
 
-  var endMarker1 = document.createElement('div');
+  endMarker1 = document.createElement('div');
   endMarker1.className = 'endMarker2';
   endMarker1.style.backgroundImage = "url('./img/little_man.png')";
   endMarker1.style.width = '80px';

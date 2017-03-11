@@ -10,6 +10,7 @@ var smallmapMarker;
 var endpointMarkerMap1;
 var endpointMarkerMap2;
 var point;
+var endMarker1;
 var winner = false;
 var points = [
 	{
@@ -32,7 +33,7 @@ function reload(){
 		point = data.currentPoint;
     map.setCenter(points[point].startPoints);
     map2.setCenter(points[point].startPoints);
-
+    endMarker1.style.backgroundImage = "url('./img/little_man.png')";
     smallmapMarker.setLngLat(points[point].startPoints);
     endpointMarkerMap1.setLngLat(points[point].endPoint);
     endpointMarkerMap2.setLngLat(points[point].endPoint);
