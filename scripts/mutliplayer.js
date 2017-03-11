@@ -10,6 +10,7 @@ var smallmapMarker;
 var endpointMarkerMap1;
 var endpointMarkerMap2;
 var point;
+var winner = false;
 var points = [
 	{
 		name : 'Manchester',
@@ -61,7 +62,8 @@ $(function(){
 
 	playerTracking.addListener({
 	    message: function(obj){
-	    	if(obj.message.type === 'win'){
+	    	if(obj.message.type === 'win' && !winner){
+	    		winner = true;
 	    		// display win message on phone screen 
 	    		var winnerName = obj.message.name;
 	    		$('#notice').html(winnerName + '<br>WINS!<br>');
@@ -69,6 +71,7 @@ $(function(){
 	    		$('#notice').show();
 				setTimeout(function(){
 					$('#notice').hide(); 
+					winner = false;
 					reload();
 				}, 5000);
 				return false;
