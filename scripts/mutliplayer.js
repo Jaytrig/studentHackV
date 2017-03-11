@@ -29,7 +29,7 @@ var points = [
 },
 {
 	name : 'London',
-	startPoints : [ -0.112204, 51.504149 ],
+	startPoints : [ -0.120641, 51.494136 ],
 	endPoint : [ -0.126927, 51.513773]
 }
 	]
