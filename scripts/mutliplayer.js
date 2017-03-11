@@ -11,7 +11,7 @@ var endpointMarkerMap1;
 var endpointMarkerMap2;
 var point;
 var endMarker1;
-var winner = false;
+var keyMap = {38: false, 40: false, 39: false, 37: false};
 var points = [
 	{
 		name : 'Manchester',
@@ -30,10 +30,11 @@ function reload(){
   $.ajax({
   url: "./getpoint"
 }).done(function(data) {
-		point = data.currentPoint;
+	point = data.currentPoint;
     map.setCenter(points[point].startPoints);
     map2.setCenter(points[point].startPoints);
     endMarker1.style.backgroundImage = "url('./img/little_man.png')";
+    keyMap = {38: false, 40: false, 39: false, 37: false};
     smallmapMarker.setLngLat(points[point].startPoints);
     endpointMarkerMap1.setLngLat(points[point].endPoint);
     endpointMarkerMap2.setLngLat(points[point].endPoint);
@@ -63,8 +64,8 @@ $(function(){
 
 	playerTracking.addListener({
 	    message: function(obj){
-	    	if(obj.message.type === 'win' && !winner){
-	    		winner = true;
+	    	if(obj.message.type === 'win'){
+	    		keyMap = {};
 	    		// display win message on phone screen 
 	    		var winnerName = obj.message.name;
 	    		$('#notice').html(winnerName + '<br>WINS!<br>');

@@ -145,9 +145,6 @@
           return t * (2 - t);
       }
 
-
-       var keyMap = {38: false, 40: false, 39: false, 37: false};
-
       map.on('load', function() {
 
 
