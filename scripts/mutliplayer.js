@@ -109,7 +109,7 @@ $(function(){
 	    			popup.innerHTML = 'HO';
 	    			popup.className = 'popupClass';
 	    			el.className = 'markerCar';
-	    			el.body.appendChild(popup); 
+	    			el.appendChild(popup); 
 
 	    			
 	    			var playerMarker = new mapboxgl.Marker(el)
