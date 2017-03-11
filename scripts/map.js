@@ -228,7 +228,7 @@
           var d = distanceTwoPoints(cur.lat.toFixed(6), cur.lng.toFixed(6), points[point].endPoint[1], points[point].endPoint[0]);
 
           $('#distanceTag').text(d +' KM Left '+ points[point].name);
-          if(d, d < 0.01 && !winner){
+          if(parseFloat(d) < 0.01 && !winner){
             $.ajax({
             url: "./nextpoint"
             }).done(function(data){
