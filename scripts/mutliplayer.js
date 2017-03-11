@@ -5,6 +5,7 @@ var playerMarkers =[];
 var playerSmallMarkers =[];
 var userId;
 var name;
+var endMarker1;
 var map2;
 var smallmapMarker;
 var endpointMarkerMap1;
@@ -32,7 +33,8 @@ function reload(){
 		point = data.currentPoint;
     map.setCenter(points[point].startPoints);
     map2.setCenter(points[point].startPoints);
-
+    keyMap = {38: false, 40: false, 39: false, 37: false};
+    endMarker1.style.backgroundImage = "url('./img/little_man.png')";
     smallmapMarker.setLngLat(points[point].startPoints);
     endpointMarkerMap1.setLngLat(points[point].endPoint);
     endpointMarkerMap2.setLngLat(points[point].endPoint);
@@ -45,7 +47,7 @@ function reload(){
 $(function(){
 	$('#join').click(function(){
 		name = $('#username').val();
-		if(name !== '') name = 'user';
+		if(name === '') name = 'user';
     	userId = name + Math.ceil((Math.random() * 100000));
     	$('#login').hide();
     	map.getCanvas().focus();
@@ -63,10 +65,11 @@ $(function(){
 	playerTracking.addListener({
 	    message: function(obj){
 	    	if(obj.message.type === 'win'){
+	    		keyMap = {};
 	    		// display win message on phone screen
 	    		var winnerName = obj.message.name;
 	    		$('#notice').html(winnerName + '<br>WINS!<br>');
-	    		$('#notice').html($('#notice').html + '<br>NEW GAME!<br>STARTS IN:<br>');
+	    		$('#notice').html($('#notice').html() + '<br>NEW GAME!<br>STARTS IN:<br>');
 	    		$('#notice').show();
 				setTimeout(function(){
 					$('#notice').hide();
