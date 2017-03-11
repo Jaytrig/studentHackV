@@ -7,14 +7,18 @@
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.33.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.33.0/mapbox-gl.css' rel='stylesheet' />
     <style>
-        body { margin:0; padding:0; }
+        body { margin:0; padding:0; position: relative; height: 100vh; width: 100vw;}
         #map { position:absolute; top:0; bottom:0; width:100%; }
+        #smallmap {
+          position:absolute; right:10px; bottom:20px; width:250px; height: 250px ; z-index: 9999; background-color: yellow;
+        }
     </style>
 </head>
 <body>
 <div style=" position: absolute;width: 10px;height: 10px;z-index: 15;top: 50%;left: 50%;margin: -5px 0 0 -5px;background: red;">
 </div>
 <div id='map'></div>
+<div id="smallmap"></div>
 <style type="text/css">
     .roads {
         background-color: #000;
@@ -22,6 +26,10 @@
 </style>
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoibW9ydG9uZXkiLCJhIjoiY2owNGoxZm9pMDBiYzJxbmxiM2p2cG4zYSJ9.Nhvw9Lp7DZ0gXHAcoCvqiQ';
+
+
+
+
 var map = new mapboxgl.Map({
     style: 'mapbox://styles/mortoney/cj04kvk8a00al2rmvgnedrlr0',
     center: [-2.2384, 53.4760],
@@ -31,6 +39,26 @@ var map = new mapboxgl.Map({
     container: 'map',
     interactive: false
 });
+
+
+var map2 = new mapboxgl.Map({
+    style: 'mapbox://styles/mapbox/streets-v10',
+    center: [-2.2384, 53.4760],
+    zoom: 13,
+    container: 'smallmap',
+    interactive: false
+});
+
+var el = document.createElement('div');
+el.className = 'marker';
+el.style.background = 'red';
+el.style.width = '10px';
+el.style.height = '10px';
+
+
+var smallmapMarker = new mapboxgl.Marker(el)
+                          .setLngLat([-2.2384, 53.4760])
+                          .addTo(map2);
 
 // the 'building' layer in the mapbox-streets vector source contains building-height
 // data from OpenStreetMap.
@@ -57,21 +85,48 @@ map.on('load', function() {
     });
 });
 // pixels the map pans when the up or down arrow is clicked
-    var deltaDistance = 20;
+    var deltaDistance = 25;
 
     // degrees the map rotates when the left or right arrow is clicked
     var deltaDegrees = 5;
+    var onRoad;
+    var dataLeft;
+    var dataRight;
+
 
     function easing(t) {
         var data = map.queryRenderedFeatures([window.innerWidth / 2, window.innerHeight / 2]);
-        var isRoad = "";
+        var centerCor = map.getCenter();
+
+        map2.setCenter(centerCor);
+        smallmapMarker.setLngLat(centerCor);
+
+
+        var numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+        onRoad = false;
         if(data.length !== 0){
-            isRoad = data[0].layer.id;
+            var isRoad = data[0].layer['source-layer'];
+            onRoad = isRoad.includes('road');
+            console.log(isRoad, !!onRoad);
+            dataLeft = [];
+            dataRight = [];
+        }else{
+          dataLeft = numbers.map(function(num) {
+            var left = map.queryRenderedFeatures([(window.innerWidth / 2) - num, window.innerHeight / 2]);
+            if(left.length !== 0){
+                return left[0].layer['source-layer'].includes('road');
+              }
+          });
+
+          dataRight = numbers.map(function(num) {
+            var right = map.queryRenderedFeatures([(window.innerWidth / 2) + num, window.innerHeight / 2]);
+            if(right.length !== 0){
+              return right[0].layer['source-layer'].includes('road');
+            }
+          });
         }
 
-        if(isRoad.substring(0,4) === 'road'){
-            console.log("road");
-        }
+
         return t * (2 - t);
     }
 
@@ -82,14 +137,11 @@ map.on('load', function() {
             e.preventDefault();
             if (e.which === 38) { // up
               deltaDegrees = 5
+              if(!!onRoad || dataRight.includes(true) || dataLeft.includes(true)){
                 map.panBy([0, -deltaDistance], {
                     easing: easing
                 });
-                map.easeTo({
-                    bearing: map.getBearing() - deltaDegrees,
-                    
-                    easing: easing
-                });
+              }
             } else if (e.which === 40) { // down
                 map.panBy([0, deltaDistance], {
                     easing: easing
@@ -100,8 +152,8 @@ map.on('load', function() {
                     bearing: map.getBearing() - deltaDegrees,
                     easing: easing
                 });
-               // deltaDegrees = 20
-            } 
+               deltaDegrees = 20
+            }
             else if (e.which === 39) { // right
 
 
@@ -109,7 +161,7 @@ map.on('load', function() {
                     bearing: map.getBearing() + deltaDegrees,
                     easing: easing
                 });
-                //deltaDegrees = 20
+                deltaDegrees = 20
             }
         }, true);
     });
