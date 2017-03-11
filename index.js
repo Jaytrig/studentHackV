@@ -21,6 +21,8 @@ app.get('/nextpoint', function (req, res) {
   if(point > 1){
     point = 0;
   }
+
+  res.json({});
 })
 
 const port = process.env.PORT || 3000;
