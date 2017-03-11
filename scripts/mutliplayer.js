@@ -44,7 +44,8 @@ $(function(){
 	    	if(obj.message.type === 'win'){
 	    		// display win message on phone screen
 	    		var winnerName = obj.message.name;
-	    		window.location.reload();
+	    		$('#notice').html(winnerName + '<br>WINS!<br>');
+	    		$('#notice').html($('#notice').html + '<br>NEW GAME!<br>STARTS IN:<br>');
 	    	}
 	    	if(userId !== obj.publisher){
 		    	var newCenter = [obj.message.lng, obj.message.lat];
