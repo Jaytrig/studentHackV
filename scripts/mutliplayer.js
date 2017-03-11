@@ -29,8 +29,13 @@ var points = [
 },
 {
 	name : 'London',
-	startPoints : [ -0.120641, 51.494136 ],
+	startPoints : [ -0.132530, 51.488931 ],
 	endPoint : [ -0.126927, 51.513773]
+},
+{
+	name : 'Berin',
+	startPoints : [ 13.425582, 52.487799 ],
+	endPoint : [13.394500, 52.501202]
 }
 	]
 	function distanceTwoPoints(lat1, lon1, lat2, lon2) {
@@ -40,7 +45,7 @@ var points = [
 	c(lat1 * p) * c(lat2 * p) *
 	(1 - c((lon2 - lon1) * p))/2;
 
-	return ((12742 * Math.asin(Math.sqrt(a)))*0.62137).toFixed(2); // 2 * R; R = 6371 km
+	return (((12742 * Math.asin(Math.sqrt(a)))*0.62137) * 0.621371).toFixed(2); // 2 * R; R = 6371 km
 }
 
 function reload(newPoint){
@@ -53,7 +58,7 @@ function reload(newPoint){
 	endpointMarkerMap2.setLngLat(points[newPoint].endPoint);
 
 	var d = distanceTwoPoints(points[newPoint].startPoints[1], points[newPoint].startPoints[0], points[newPoint].endPoint[1], points[newPoint].endPoint[0]);
-	$('#distanceTag').text(d +' KM Left '+ points[newPoint].name);
+	$('#distanceTag').text(d +'M Left '+ points[newPoint].name);
 	winner = false;
 }
 

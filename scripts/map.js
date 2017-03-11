@@ -18,7 +18,7 @@
   });
 
   var d = distanceTwoPoints(points[point].startPoints[1], points[point].startPoints[0], points[point].endPoint[1], points[point].endPoint[0]);
-  $('#distanceTag').text(d +' KM Left '+ points[point].name);
+  $('#distanceTag').text(d +' M Left '+ points[point].name);
 
 
   map2 = new mapboxgl.Map({
@@ -102,8 +102,9 @@
 
           var data = map.queryRenderedFeatures([window.innerWidth / 2, window.innerHeight / 2]);
           var centerCor = map.getCenter();
+
+          map2.setCenter(centerCor);
           map2.rotateTo(map.getBearing());
-          // map2.setCenter(centerCor);
           smallmapMarker.setLngLat(centerCor);
 
 
@@ -227,7 +228,7 @@
         function didUserWin(cur){
           var d = distanceTwoPoints(cur.lat.toFixed(6), cur.lng.toFixed(6), points[point].endPoint[1], points[point].endPoint[0]);
 
-          $('#distanceTag').text(d +' KM Left '+ points[point].name);
+          $('#distanceTag').text(d +' M Left '+ points[point].name);
           if(parseFloat(d) < 0.01 && !winner){
             winner = true;
             $.ajax({
