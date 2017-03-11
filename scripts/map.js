@@ -18,7 +18,7 @@
   });
 
   var d = distanceTwoPoints(points[point].startPoints[1], points[point].startPoints[0], points[point].endPoint[1], points[point].endPoint[0]);
-  $('#distanceTag').text(d +' M Left '+ points[point].name);
+  $('#distanceTag').text(d +' KM Left '+ points[point].name);
 
 
   map2 = new mapboxgl.Map({

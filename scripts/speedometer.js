@@ -6,7 +6,7 @@
 $.fn.myfunc = function (userPref) {
   var self = this;
   this.defaultProperty = {
-    maxVal              : 180,         /**Max value of the meter*/
+    maxVal              : 220,         /**Max value of the meter*/
     divFact             : 10,          /**Division value of the meter*/
     dangerLevel         : 120,         /**more than this leval, color will be red*/
     initDeg             : -45,         /**reading begins angle*/
@@ -26,8 +26,8 @@ $.fn.myfunc = function (userPref) {
     midNobH             : 3,           /**indicator mid nob height*/
     noOfSmallDiv        : 2,           /**no of small div between main div*/
     eventListenerType   : 'change',    /**type of event listener*/
-    multiplier          : 1,	       /**Center value multiplier e.g. 1 x 1000 RPM*/	
-    gagueLabel   	: 'km/h'       /**Label on guage Face*/	
+    multiplier          : 1,	       /**Center value multiplier e.g. 1 x 1000 RPM*/
+    gagueLabel   	: 'km/h'       /**Label on guage Face*/
   }
   if(typeof userPref === 'object')
   for (var prop in userPref)this.defaultProperty[prop] = userPref[prop];
@@ -68,7 +68,7 @@ $.fn.myfunc = function (userPref) {
         '#' + this.parentElemId + ' .speedNobe div{',
           'width  :'+ this.defaultProperty.speedoNobeW + 'px;',
           'left :'+ this.defaultProperty.speedoNobeL + 'px;',
-        '}',      
+        '}',
         '#' + this.parentElemId + ' .nob{',
           'width  :'+ this.defaultProperty.nobW + 'px;',
           'height :'+ this.defaultProperty.nobH + 'px;',
@@ -83,7 +83,7 @@ $.fn.myfunc = function (userPref) {
         '}',
       '</style>',
     ].join('');
-    this.parentElem.append(tempStyleVar);    
+    this.parentElem.append(tempStyleVar);
   }
   this.creatHtmlsElecments = function(){
     this.parentElemId = 'speedometerWraper-' + $(this).attr('id');
@@ -99,13 +99,13 @@ $.fn.myfunc = function (userPref) {
       var dangCls = "";
       if(curIndVal >= this.defaultProperty.dangerLevel){
         dangCls = "danger";
-      }   
+      }
       var induCatorLinesPosY = this.defaultProperty.indicatorRadius * Math.cos( 0.01746 * curDig);
       var induCatorLinesPosX = this.defaultProperty.indicatorRadius * Math.sin( 0.01746 * curDig);
-      
+
       var induCatorNumbPosY = this.defaultProperty.indicatorNumbRadius * Math.cos( 0.01746 * curDig);
       var induCatorNumbPosX = this.defaultProperty.indicatorNumbRadius * Math.sin( 0.01746 * curDig);
-      
+
       if(i%this.defaultProperty.noOfSmallDiv == 0){
         induCatorLinesPosLeft = (this.defaultProperty.edgeRadius - induCatorLinesPosX )-2;
         induCatorLinesPosTop  = (this.defaultProperty.edgeRadius - induCatorLinesPosY)-10;
@@ -133,7 +133,7 @@ $.fn.myfunc = function (userPref) {
       }
     }
     this.parentElem.append('<div class="envelope">');
-    
+
     var speedNobe = [
       '<div class="speedNobe">',
         '<div></div>',
@@ -143,7 +143,7 @@ $.fn.myfunc = function (userPref) {
 
     this.parentElem.find(".envelope").append(speedNobe+tempDiv);
   }
-  this.changePosition = function (){   
+  this.changePosition = function (){
     console.log($(this).val())
     var speed = $(this).val();
     if(speed > self.defaultProperty.maxVal){
@@ -153,17 +153,17 @@ $.fn.myfunc = function (userPref) {
       speed = 0;
     }
     speedInDeg = (self.defaultProperty.maxDeg/self.defaultProperty.maxVal)*speed + self.defaultProperty.initDeg;
-    
+
     self.parentElem.find(".speedNobe").css({
       "-webkit-transform" :'rotate('+speedInDeg+'deg)',
       "-webkit-transform" :'rotate('+speedInDeg+'deg)',
       "-moz-transform"    :'rotate('+speedInDeg+'deg)',
       "-o-transform"      :'rotate('+speedInDeg+'deg)'
     });
-    
+
     var centerVal = speed *  self.defaultProperty.multiplier;
     self.parentElem.find(".speedPosition").html(centerVal + "<br />" + self.defaultProperty.gagueLabel );
-    
+
     self.parentElem.find(".envelope .nob,.envelope .numb").removeClass("bright");
     for(var i=0; i<=noOfDev; i++){
       if(speed >= i*self.defaultProperty.divFact){

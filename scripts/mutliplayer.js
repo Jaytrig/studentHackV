@@ -58,7 +58,7 @@ function reload(newPoint){
 	endpointMarkerMap2.setLngLat(points[newPoint].endPoint);
 
 	var d = distanceTwoPoints(points[newPoint].startPoints[1], points[newPoint].startPoints[0], points[newPoint].endPoint[1], points[newPoint].endPoint[0]);
-	$('#distanceTag').text(d +'M Left '+ points[newPoint].name);
+	$('#distanceTag').text(d +'KM Left '+ points[newPoint].name);
 	winner = false;
 }
 
