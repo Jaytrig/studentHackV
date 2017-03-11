@@ -13,7 +13,7 @@ var endpointMarkerMap2;
 var point;
 var secondCounter = 0;
 var t;
-var keyMap = {38: false, 40: false, 39: false, 37: false};
+var keyMap = {38: false, 40: false, 39: false, 37: false, 87: false, 65: false, 83: false, 68: false};
 var winner = false;
 var points = [
 {
@@ -41,7 +41,7 @@ var points = [
 function reload(newPoint){
 	map.setCenter(points[newPoint].startPoints);
 	map2.setCenter(points[newPoint].startPoints);
-	keyMap = {38: false, 40: false, 39: false, 37: false};
+	keyMap = {38: false, 40: false, 39: false, 37: false, 87: false, 65: false, 83: false, 68: false};
 	endMarker1.style.backgroundImage = "url('./img/little_man.png')";
 	smallmapMarker.setLngLat(points[newPoint].startPoints);
 	endpointMarkerMap1.setLngLat(points[newPoint].endPoint);

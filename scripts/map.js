@@ -32,7 +32,7 @@
 
   var el = document.createElement('div');
   el.className = 'marker';
-  
+
   endMarker1 = document.createElement('div');
   endMarker1.className = 'endMarker2';
   endMarker1.style.backgroundImage = "url('./img/little_man.png')";
@@ -163,13 +163,13 @@
                   else if (keyMap[40] && keyMap[39]) {
                       // DOWN RIGTH
                   }
-                  else if (keyMap[40]) {
+                  else if (keyMap[40] || keyMap[83]) {
                       map.panBy([0, deltaDistance], {
                       easing: easing
                       });
                       deltaDistance=30;
                   }
-                  else if (keyMap[38]) {
+                  else if (keyMap[38] || keyMap[87]) {
                       deltaDegrees = 5
 
                       if(!!onRoad || dataRight.includes(true) || dataLeft.includes(true) || dataFront.includes(true)){
@@ -180,17 +180,17 @@
                        }
 
                   }
-                  else if (keyMap[37]) {
+                  else if (keyMap[37] || keyMap[65]) {
                       map.easeTo({
                           bearing: map.getBearing() - deltaDegrees,
                           easing: easing
                       });
-                      
+
                      deltaDegrees = 25
                      deltaDistance=30;
 
                   }
-                  else if (keyMap[39]) {
+                  else if (keyMap[39] || keyMap[68]) {
                       map.easeTo({
                           bearing: map.getBearing() + deltaDegrees,
                           easing: easing
