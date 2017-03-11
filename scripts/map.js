@@ -32,8 +32,8 @@
   var el = document.createElement('div');
   el.className = 'marker';
   el.style.background = 'red';
-  el.style.width = '5px';
-  el.style.height = '5px';
+  el.style.width = '10px';
+  el.style.height = '10px';
 
   endMarker1 = document.createElement('div');
   endMarker1.className = 'endMarker2';
