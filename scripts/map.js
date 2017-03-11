@@ -1,6 +1,5 @@
 
-
-function() {
+(function() {
   $.ajax({
   url: "./getpoint",
 }).done(function(data) {
