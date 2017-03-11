@@ -40,6 +40,11 @@ $(function(){
 
 	playerTracking.addListener({
 	    message: function(obj){
+	    	if(obj.message.type === 'win'){
+	    		// display win message on phone screen
+	    		var winnerName = obj.message.name;
+	    		window.location.reload();
+	    	}
 	    	if(userId !== obj.publisher){
 		    	var newCenter = [obj.message.lng, obj.message.lat];
 		    	players[obj.publisher] = newCenter;

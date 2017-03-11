@@ -233,6 +233,10 @@
           $('#distanceTag').text(d +' KM Left '+ points[point].name);
           if(d, d < 0.01){
             endMarker1.style.backgroundImage = "url('./img/little_man_happy.png')";
+            playerTracking.publish({
+                channel: 'taxigame',
+                message: {"name":name,"lng":newCenter.lng,"lat":newCenter.lat,"type":"win" }
+            });
             $.ajax({
             url: "./nextpoint",
             }).done(function(){
