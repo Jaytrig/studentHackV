@@ -2,19 +2,23 @@
   mapboxgl.accessToken = 'pk.eyJ1IjoibW9ydG9uZXkiLCJhIjoiY2owNGoxZm9pMDBiYzJxbmxiM2p2cG4zYSJ9.Nhvw9Lp7DZ0gXHAcoCvqiQ';
 
   map = new mapboxgl.Map({
-      style: 'mapbox://styles/mortoney/cj050mkjg00cf2snyrp55bjxq',
-      center: [-2.23834, 53.4760],
-      zoom: 19,
-      pitch: 185,
-      bearing: -17.6,
-      container: 'map',
-      interactive: false
+    var startPoints = [-2.23834, 53.4760];
+    var endPoint = [-2.23834, 53.4760];
+    // var endPoint = [-2.243101, 53.487354]
+    var map = new mapboxgl.Map({
+        style: 'mapbox://styles/mortoney/cj050mkjg00cf2snyrp55bjxq',
+        center: startPoints,
+        zoom: 19,
+        pitch: 185,
+        bearing: -17.6,
+        container: 'map',
+        interactive: false
   });
 
 
   var map2 = new mapboxgl.Map({
       style: 'mapbox://styles/mapbox/streets-v10',
-      center: [-2.2384, 53.4760],
+      center: startPoints,
       zoom: 12,
       bearing: -17.6,
       container: 'smallmap',
@@ -27,9 +31,34 @@
   el.style.width = '5px';
   el.style.height = '5px';
 
+  var endMarker1 = document.createElement('div');
+  endMarker1.className = 'endMarker2';
+  endMarker1.style.backgroundImage = "url('./img/little_man.png')";
+  endMarker1.style.width = '80px';
+  endMarker1.style.height = '120px';
+  endMarker1.style.backgroundSize=  'cover';                      /* <------ */
+  endMarker1.style.backgroundRepeat= 'no-repeat';
+  endMarker1.style.backgroundPosition= 'center center';
+
+  var endMarker2 = document.createElement('div');
+  endMarker2.className = 'endMarker1';
+  endMarker2.style.backgroundImage = "url('./img/little_man.png')";
+  endMarker2.style.width = '20px';
+  endMarker2.style.height = '30px';
+  endMarker2.style.backgroundSize=  'cover';                      /* <------ */
+  endMarker2.style.backgroundRepeat= 'no-repeat';
+  endMarker2.style.backgroundPosition= 'center center';
+
+  var endpointMarkerMap2 = new mapboxgl.Marker(endMarker2)
+                            .setLngLat(endPoint)
+                            .addTo(map2);
+
+  var endpointMarkerMap1 = new mapboxgl.Marker(endMarker1)
+                            .setLngLat(endPoint)
+                            .addTo(map);
 
   var smallmapMarker = new mapboxgl.Marker(el)
-                            .setLngLat([-2.2384, 53.4760])
+                            .setLngLat(startPoints)
                             .addTo(map2);
 
   // the 'building' layer in the mapbox-streets vector source contains building-height
@@ -80,7 +109,6 @@
           if(data.length !== 0){
               var isRoad = data[0].layer['source-layer'];
               onRoad = isRoad.includes('road');
-              console.log(isRoad, !!onRoad);
               dataLeft = [];
               dataRight = [];
               dataFront = [];
@@ -177,6 +205,10 @@
                   }
               }
               publishMove(map.getCenter());
+
+
+              didUserWin(map.getCenter());
+
           }, true);
 
           map.getCanvas().addEventListener('keyup', function(e) {
@@ -188,10 +220,28 @@
           }, true);
 
         });
+
       function publishMove(newCenter){
         playerTracking.publish({
                 channel: 'taxigame',
                 message: {"name":"Gini","lng":newCenter.lng,"lat":newCenter.lat,"type":"move" }
         });
       }
+
+        function didUserWin(cur){
+          var d = distanceTwoPoints(cur.lat.toFixed(6), cur.lng.toFixed(6), endPoint[1], endPoint[0]);
+          console.log(d, d < 0.01);
+        }
+
+        function distanceTwoPoints(lat1, lon1, lat2, lon2) {
+          var p = 0.017453292519943295;    // Math.PI / 180
+          var c = Math.cos;
+          var a = 0.5 - c((lat2 - lat1) * p)/2 +
+                  c(lat1 * p) * c(lat2 * p) *
+                  (1 - c((lon2 - lon1) * p))/2;
+
+          return ((12742 * Math.asin(Math.sqrt(a)))*0.62137).toFixed(2); // 2 * R; R = 6371 km
+        }
+
+
 })();
