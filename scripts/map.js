@@ -172,6 +172,8 @@
                   else if (keyMap[38] || keyMap[87]) {
                       deltaDegrees = 5
 
+                      $('#myValues').val(deltaDistance /2).trigger('change');
+
                       if(!!onRoad || dataRight.includes(true) || dataLeft.includes(true) || dataFront.includes(true)){
                           map.panBy([0, -deltaDistance], {
                               easing: easing
@@ -210,6 +212,9 @@
               e.preventDefault();
                if (e.keyCode in keyMap) {
                   keyMap[e.keyCode] = false;
+                  if(e.keyCode == 38 || e.keyCode == 65){
+                      $('#myValues').val(0).trigger('change');
+                  }
               }
 
           }, true);
