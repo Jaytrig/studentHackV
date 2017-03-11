@@ -32,10 +32,7 @@
 
   var el = document.createElement('div');
   el.className = 'marker';
-  el.style.background = 'yellow';
-  el.style.width = '10px';
-  el.style.height = '10px';
-
+  
   endMarker1 = document.createElement('div');
   endMarker1.className = 'endMarker2';
   endMarker1.style.backgroundImage = "url('./img/little_man.png')";
