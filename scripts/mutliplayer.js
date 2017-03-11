@@ -106,7 +106,7 @@ $(function(){
 	    		if(playerMarkers[obj.publisher] == undefined){
 	    			var el = document.createElement('div');
 	    			var popup = document.createElement('h4');
-	    			popup.innerHTML = 'HO';
+	    			popup.innerHTML = obj.message.name ;
 	    			popup.className = 'popupClass';
 	    			el.className = 'markerCar';
 	    			el.appendChild(popup); 
