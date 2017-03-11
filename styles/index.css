@@ -16,7 +16,13 @@
     background-color: #000;
 }
 
+
+#distanceTag{
+    text-align: center;
+}
+
 body {
+  font-family: 'Roboto', sans-serif;
   margin:0;
   padding:0;
   position: relative;

@@ -1,8 +1,8 @@
 (function() {
   mapboxgl.accessToken = 'pk.eyJ1IjoibW9ydG9uZXkiLCJhIjoiY2owNGoxZm9pMDBiYzJxbmxiM2p2cG4zYSJ9.Nhvw9Lp7DZ0gXHAcoCvqiQ';
   var startPoints = [-2.23834, 53.4760];
-  var endPoint = [-2.23834, 53.4760];
-  // var endPoint = [-2.243101, 53.487354]
+  // var endPoint = [-2.23834, 53.4760];
+  var endPoint = [-2.243101, 53.487354]
   map = new mapboxgl.Map({
         style: 'mapbox://styles/mortoney/cj050mkjg00cf2snyrp55bjxq',
         center: startPoints,
@@ -12,6 +12,9 @@
         container: 'map',
         interactive: false
   });
+
+  var d = distanceTwoPoints(startPoints[1], startPoints[0], endPoint[1], endPoint[0]);
+  $('#distanceTag').text(d +' KM Left');
 
 
   map2 = new mapboxgl.Map({
@@ -228,6 +231,8 @@
 
         function didUserWin(cur){
           var d = distanceTwoPoints(cur.lat.toFixed(6), cur.lng.toFixed(6), endPoint[1], endPoint[0]);
+
+          $('#distanceTag').text(d +' KM Left');
           if(d, d < 0.01){
             //WIN!
           }
