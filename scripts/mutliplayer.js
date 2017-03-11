@@ -72,10 +72,6 @@ $(function(){
 	    channels: ['taxigame'],
 	    withPresence: true
 	});
-	function countSeconds(){
-		secondCounter++;
-		$('#seconds').text(secondCounter);
-	}
 
 	playerTracking.addListener({
 	    message: function(obj){
@@ -86,12 +82,10 @@ $(function(){
 	    		$('#winnerText').html(winnerName + '<br>WINS!<br>');
 	    		$('#winnerText').html($('#notice').html() + '<br>NEW GAME!<br>STARTS IN:<br>');
 	    		$('#notice').show();
-	    		t=setInterval(countSeconds,1000);
-				setTimeout(function(){
-					$('#notice').hide();
-					clearInterval(t);
-					reload();
-				}, 8000);
+					setTimeout(function(){
+						$('#notice').hide();
+						reload();
+					}, 8000);
 	    	}
 	    	if(userId !== obj.publisher){
 		    	var newCenter = [obj.message.lng, obj.message.lat];
