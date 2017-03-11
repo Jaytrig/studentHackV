@@ -74,7 +74,7 @@ $(function(){
 	});
 	function countSeconds(){
 		secondCounter++;
-		$('seconds').text(secondCounter);
+		$('#seconds').text(secondCounter);
 	}
 
 	playerTracking.addListener({
