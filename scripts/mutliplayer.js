@@ -62,9 +62,10 @@ $(function(){
 			name = $('#username').val();
 			if(name === '') name = 'user';
 			$('#login').hide();
+			map.getCanvas().focus();
 		});
-		
-		map.getCanvas().focus();
+
+
 		playerTracking = new PubNub({
 			publishKey: 'pub-c-bdf8080e-74cc-4302-86b0-2de8ada8fdd9',
 			subscribeKey: 'sub-c-8882bb02-0648-11e7-89e8-02ee2ddab7fe',
