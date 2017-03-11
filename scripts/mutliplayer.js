@@ -37,22 +37,17 @@ var points = [
 	return ((12742 * Math.asin(Math.sqrt(a)))*0.62137).toFixed(2); // 2 * R; R = 6371 km
 }
 
-function reload(){
-	$.ajax({
-		url: "./getpoint"
-	}).done(function(data) {
-		point = data.currentPoint;
-		map.setCenter(points[point].startPoints);
-		map2.setCenter(points[point].startPoints);
-		keyMap = {38: false, 40: false, 39: false, 37: false};
-		endMarker1.style.backgroundImage = "url('./img/little_man.png')";
-		smallmapMarker.setLngLat(points[point].startPoints);
-		endpointMarkerMap1.setLngLat(points[point].endPoint);
-		endpointMarkerMap2.setLngLat(points[point].endPoint);
+function reload(newPoint){
+	map.setCenter(points[newPoint].startPoints);
+	map2.setCenter(points[newPoint].startPoints);
+	keyMap = {38: false, 40: false, 39: false, 37: false};
+	endMarker1.style.backgroundImage = "url('./img/little_man.png')";
+	smallmapMarker.setLngLat(points[newPoint].startPoints);
+	endpointMarkerMap1.setLngLat(points[newPoint].endPoint);
+	endpointMarkerMap2.setLngLat(points[newPoint].endPoint);
 
-		var d = distanceTwoPoints(points[point].startPoints[1], points[point].startPoints[0], points[point].endPoint[1], points[point].endPoint[0]);
-		$('#distanceTag').text(d +' KM Left '+ points[point].name);
-	});
+	var d = distanceTwoPoints(points[newPoint].startPoints[1], points[newPoint].startPoints[0], points[newPoint].endPoint[1], points[newPoint].endPoint[0]);
+	$('#distanceTag').text(d +' KM Left '+ points[newPoint].name);
 }
 
 $(function(){
@@ -90,11 +85,12 @@ $(function(){
 				keyMap = {};
 	    		// display win message on phone screen
 	    		var winnerName = obj.message.name;
+	    		var thisPoint = obj.message.point;
 	    		$('#winnerText').html(winnerName + '<br>WINS!<br>NEW GAME<br>STARTS SOON!<br>');
 	    		$('#notice').show();
 	    		setTimeout(function(){
 	    			$('#notice').hide();
-	    			reload();
+	    			reload(thisPoint);
 	    		}, 8000);
 	    		return false;
 	    	}
