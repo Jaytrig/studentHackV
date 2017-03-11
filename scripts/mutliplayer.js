@@ -23,7 +23,8 @@ var points = [
 {
 	name : 'New York',
 	startPoints : [ -73.990157, 40.732288],
-	endPoint : [-73.985100, 40.747811]
+	// endPoint : [-73.985100, 40.747811]
+	endPoint : [ -73.990157, 40.732388]
 }
 	]
 	function distanceTwoPoints(lat1, lon1, lat2, lon2) {
