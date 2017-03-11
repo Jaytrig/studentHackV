@@ -140,28 +140,3 @@ $(function(){
 		);
   	});
 });
-
-
-(function () {
-var nativeSetTimeout = window.setTimeout;
-
-window.bindTimeout = function (listener, interval) {
-    function setTimeout(code, delay) {
-        var elapsed = 0,
-            h;
-
-        h = window.setInterval(function () {
-                elapsed += interval;
-                if (elapsed < delay) {
-                    listener(delay - elapsed);
-                } else {
-                    window.clearInterval(h);
-                }
-            }, interval);
-        return nativeSetTimeout(code, delay);
-    }
-
-    window.setTimeout = setTimeout;
-    setTimeout._native = nativeSetTimeout;
-};
-}());
