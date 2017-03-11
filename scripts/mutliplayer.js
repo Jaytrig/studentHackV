@@ -19,7 +19,7 @@ var points = [
 	{
 		name : 'New York',
 		startPoints : [ -73.990157, 40.732288],
-		endPoint : [ -73.990157, 40.732288]
+		endPoint : [ -73.990157, 40.732388]
 		// endPoint : [-73.985100, 40.747811]
 	}
 ]
@@ -62,13 +62,13 @@ $(function(){
 	playerTracking.addListener({
 	    message: function(obj){
 	    	if(obj.message.type === 'win'){
-	    		// display win message on phone screen 
+	    		// display win message on phone screen
 	    		var winnerName = obj.message.name;
 	    		$('#notice').html(winnerName + '<br>WINS!<br>');
 	    		$('#notice').html($('#notice').html + '<br>NEW GAME!<br>STARTS IN:<br>');
 	    		$('#notice').show();
 				setTimeout(function(){
-					$('#notice').hide(); 
+					$('#notice').hide();
 					reload();
 				}, 5000);
 	    	}
