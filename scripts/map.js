@@ -228,7 +228,9 @@
 
         function didUserWin(cur){
           var d = distanceTwoPoints(cur.lat.toFixed(6), cur.lng.toFixed(6), endPoint[1], endPoint[0]);
-          console.log(d, d < 0.01);
+          if(d, d < 0.01){
+            //WIN!
+          }
         }
 
         function distanceTwoPoints(lat1, lon1, lat2, lon2) {
