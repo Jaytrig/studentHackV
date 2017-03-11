@@ -107,7 +107,20 @@ $(function(){
 	    			var el = document.createElement('div');
 	    			el.className = 'markerCar';
 
+	    			var markerHeight = 50, markerRadius = 10, linearOffset = 25;
+					var popupOffsets = {
+					 'top': [0, 0],
+					 'top-left': [0,0],
+					 'top-right': [0,0],
+					 'bottom': [0, -markerHeight],
+					 'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+					 'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+					 'left': [markerRadius, (markerHeight - markerRadius) * -1],
+					 'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+					 };
+
 	    			var playerMarker = new mapboxgl.Marker(el)
+					 .Popup({offset:popupOffsets, closeOnClick: false})
 	    			.setLngLat([newCenter[0], newCenter[1]])
 	    			.addTo(map);
 	    			playerMarkers[obj.publisher] = playerMarker;
