@@ -12,15 +12,20 @@
     </style>
 </head>
 <body>
-<div style=" position: absolute;width: 20px;height: 20px;z-index: 15;top: 50%;left: 50%;margin: -10px 0 0 -10px;background: red;">
+<div style=" position: absolute;width: 10px;height: 10px;z-index: 15;top: 50%;left: 50%;margin: -5px 0 0 -5px;background: red;">
 </div>
 <div id='map'></div>
+<style type="text/css">
+    .roads {
+        background-color: #000;
+    }
+</style>
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoibW9ydG9uZXkiLCJhIjoiY2owNGoxZm9pMDBiYzJxbmxiM2p2cG4zYSJ9.Nhvw9Lp7DZ0gXHAcoCvqiQ';
 var map = new mapboxgl.Map({
     style: 'mapbox://styles/mortoney/cj04kvk8a00al2rmvgnedrlr0',
     center: [-2.2384, 53.4760],
-    zoom: 18,
+    zoom: 19,
     pitch: 185,
     bearing: -17.6,
     container: 'map',
@@ -47,17 +52,26 @@ map.on('load', function() {
                 'type': 'identity',
                 'property': 'min_height'
             },
-            'fill-extrusion-opacity': .6
+            'fill-extrusion-opacity': .5
         }
     });
 });
 // pixels the map pans when the up or down arrow is clicked
-    var deltaDistance = 50;
+    var deltaDistance = 20;
 
     // degrees the map rotates when the left or right arrow is clicked
-    var deltaDegrees = 20;
+    var deltaDegrees = 5;
 
     function easing(t) {
+        var data = map.queryRenderedFeatures([window.innerWidth / 2, window.innerHeight / 2]);
+        var isRoad = "";
+        if(data.length !== 0){
+            isRoad = data[0].layer.id;
+        }
+
+        if(isRoad.substring(0,4) === 'road'){
+            console.log("road");
+        }
         return t * (2 - t);
     }
 
@@ -71,6 +85,11 @@ map.on('load', function() {
                 map.panBy([0, -deltaDistance], {
                     easing: easing
                 });
+                map.easeTo({
+                    bearing: map.getBearing() - deltaDegrees,
+                    
+                    easing: easing
+                });
             } else if (e.which === 40) { // down
                 map.panBy([0, deltaDistance], {
                     easing: easing
@@ -81,15 +100,16 @@ map.on('load', function() {
                     bearing: map.getBearing() - deltaDegrees,
                     easing: easing
                 });
-                deltaDegrees = 20
-            } else if (e.which === 39) { // right
+               // deltaDegrees = 20
+            } 
+            else if (e.which === 39) { // right
 
 
                 map.easeTo({
                     bearing: map.getBearing() + deltaDegrees,
                     easing: easing
                 });
-                deltaDegrees = 20
+                //deltaDegrees = 20
             }
         }, true);
     });
