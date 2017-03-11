@@ -35,6 +35,9 @@ function reload(){
     smallmapMarker.setLngLat(points[point].startPoints);
     endpointMarkerMap1.setLngLat(points[point].endPoint);
     endpointMarkerMap2.setLngLat(points[point].endPoint);
+
+		var d = distanceTwoPoints(points[point].startPoints[1], points[point].startPoints[0], points[point].endPoint[1], points[point].endPoint[0]);
+		$('#distanceTag').text(d +' KM Left '+ points[point].name);
   });
 }
 
