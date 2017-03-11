@@ -45,7 +45,7 @@ var points = [
 	c(lat1 * p) * c(lat2 * p) *
 	(1 - c((lon2 - lon1) * p))/2;
 
-	return (((12742 * Math.asin(Math.sqrt(a)))*0.62137) * 0.621371).toFixed(2); // 2 * R; R = 6371 km
+	return ((12742 * Math.asin(Math.sqrt(a)))*0.62137).toFixed(2); // 2 * R; R = 6371 km
 }
 
 function reload(newPoint){
