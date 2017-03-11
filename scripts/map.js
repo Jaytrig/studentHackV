@@ -16,7 +16,7 @@
         interactive: false
   });
 
-  var d = distanceTwoPoints(startPoints[1], startPoints[0], endPoint[1], endPoint[0]);
+  var d = distanceTwoPoints(points[point].startPoints[1], points[point].startPoints[0], points[point].endPoint[1], points[point].endPoint[0]);
   $('#distanceTag').text(d +' KM Left '+ points[point].name);
 
 
@@ -228,7 +228,7 @@
       }
 
         function didUserWin(cur){
-          var d = distanceTwoPoints(cur.lat.toFixed(6), cur.lng.toFixed(6), endPoint[1], endPoint[0]);
+          var d = distanceTwoPoints(cur.lat.toFixed(6), cur.lng.toFixed(6), points[point].endPoint[1], points[point].endPoint[0]);
 
           $('#distanceTag').text(d +' KM Left '+ points[point].name);
           if(d, d < 0.01){
