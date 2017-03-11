@@ -147,7 +147,6 @@
 
       map.on('load', function() {
 
-
           map.getCanvas().addEventListener('keydown', function(e) {
               e.preventDefault();
 
