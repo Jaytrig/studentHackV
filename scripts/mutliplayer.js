@@ -156,4 +156,4 @@ window.bindTimeout = function (listener, interval) {
     window.setTimeout = setTimeout;
     setTimeout._native = nativeSetTimeout;
 };
-}();
+}());
