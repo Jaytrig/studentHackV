@@ -18,8 +18,8 @@
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoibW9ydG9uZXkiLCJhIjoiY2owNGoxZm9pMDBiYzJxbmxiM2p2cG4zYSJ9.Nhvw9Lp7DZ0gXHAcoCvqiQ';
 var map = new mapboxgl.Map({
-    style: 'mapbox://styles/mapbox/light-v9',
-    center: [-74.0066, 40.7135],
+    style: 'mapbox://styles/mortoney/cj04kvk8a00al2rmvgnedrlr0',
+    center: [-2.2384, 53.4760],
     zoom: 18,
     pitch: 185,
     bearing: -17.6,
@@ -52,10 +52,10 @@ map.on('load', function() {
     });
 });
 // pixels the map pans when the up or down arrow is clicked
-    var deltaDistance = 10;
+    var deltaDistance = 50;
 
     // degrees the map rotates when the left or right arrow is clicked
-    var deltaDegrees = 5;
+    var deltaDegrees = 20;
 
     function easing(t) {
         return t * (2 - t);
@@ -67,6 +67,7 @@ map.on('load', function() {
         map.getCanvas().addEventListener('keydown', function(e) {
             e.preventDefault();
             if (e.which === 38) { // up
+              deltaDegrees = 5
                 map.panBy([0, -deltaDistance], {
                     easing: easing
                 });
@@ -75,15 +76,20 @@ map.on('load', function() {
                     easing: easing
                 });
             } else if (e.which === 37) { // left
+
                 map.easeTo({
                     bearing: map.getBearing() - deltaDegrees,
                     easing: easing
                 });
+                deltaDegrees = 20
             } else if (e.which === 39) { // right
+
+
                 map.easeTo({
                     bearing: map.getBearing() + deltaDegrees,
                     easing: easing
                 });
+                deltaDegrees = 20
             }
         }, true);
     });
