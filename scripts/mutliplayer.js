@@ -44,7 +44,7 @@ function reload(){
 $(function(){
 	$('#join').click(function(){
 		name = $('#username').val();
-		if(name !== '') name = 'user';
+		if(name === '') name = 'user';
     	userId = name + Math.ceil((Math.random() * 100000));
     	$('#login').hide();
     	map.getCanvas().focus();
@@ -65,12 +65,13 @@ $(function(){
 	    		// display win message on phone screen 
 	    		var winnerName = obj.message.name;
 	    		$('#notice').html(winnerName + '<br>WINS!<br>');
-	    		$('#notice').html($('#notice').html + '<br>NEW GAME!<br>STARTS IN:<br>');
+	    		$('#notice').html($('#notice').html() + '<br>NEW GAME!<br>STARTS IN:<br>');
 	    		$('#notice').show();
 				setTimeout(function(){
 					$('#notice').hide(); 
 					reload();
 				}, 5000);
+				return false;
 	    	}
 	    	if(userId !== obj.publisher){
 		    	var newCenter = [obj.message.lng, obj.message.lat];
