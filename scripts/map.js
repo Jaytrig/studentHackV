@@ -99,10 +99,11 @@
 
 
       function easing(t) {
+
           var data = map.queryRenderedFeatures([window.innerWidth / 2, window.innerHeight / 2]);
           var centerCor = map.getCenter();
-
-          map2.setCenter(centerCor);
+          map2.rotateTo(map.getBearing());
+          // map2.setCenter(centerCor);
           smallmapMarker.setLngLat(centerCor);
 
 
@@ -184,6 +185,7 @@
                           bearing: map.getBearing() - deltaDegrees,
                           easing: easing
                       });
+                      
                      deltaDegrees = 25
                      deltaDistance=30;
 
@@ -213,6 +215,7 @@
           }, true);
 
         });
+
 
       function publishMove(newCenter){
         playerTracking.publish({
