@@ -27,7 +27,8 @@ var points = [
 function reload(){
   $.ajax({
   url: "./getpoint"
-  }).done(function(data) {
+}).done(function(data) {
+		point = data.currentPoint;
     map.setCenter(points[point].startPoints);
     map2.setCenter(points[point].startPoints);
 
