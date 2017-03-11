@@ -233,7 +233,7 @@
         function didUserWin(cur){
           var d = distanceTwoPoints(cur.lat.toFixed(6), cur.lng.toFixed(6), points[point].endPoint[1], points[point].endPoint[0]);
 
-          $('#distanceTag').text(d +' M Left '+ points[point].name);
+          $('#distanceTag').text(d +' KM Left '+ points[point].name);
           if(parseFloat(d) < 0.01 && !winner){
             winner = true;
             $.ajax({
