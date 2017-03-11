@@ -32,17 +32,30 @@ body {
 }
 
 #smallmap {
-  position:absolute;
-  right:10px;
-  bottom:20px;
-  width:250px;
-  height: 250px ;
+  position: absolute;
+  right: 63px;
+  bottom: 139px;
+  width: 228px;
+  height: 350px;
   z-index: 9999;
-  background-color: yellow;
+}
+
+#satNav{
+  position: absolute;
+  right: 63px;
+  bottom: 88px;
+  width: 228px;
+  height: 52px;
+  z-index: 9999;
+  background-color: lightgrey;
+}
+
+.endMarker1{
+  margin: -30px 0 0 -10px
 }
 
 .endMarker2{
-  margin: -120px 0 0 -40px
+  margin: -120px 0 0 -40px;
 }
 
 .markerCar {
@@ -53,4 +66,21 @@ body {
   background-image: url('/img/car.png');
   background-size: cover;
   opacity: 0.5;
+}
+
+
+#phone{
+  position: absolute;
+  right:10px;
+  bottom:40px;
+  height: 600px;
+  width: 350px;
+  background-image: url('/img/iphone.png');
+  background-size: cover;
+}
+
+#phoneCont{
+  position: relative;
+  height: 100%;
+  width: 100%;
 }
