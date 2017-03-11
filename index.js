@@ -22,7 +22,7 @@ app.get('/nextpoint', function (req, res) {
     point = 0;
   }
 
-  res.json({});
+  res.json({'currentPoint' : point});
 })
 
 const port = process.env.PORT || 3000;
