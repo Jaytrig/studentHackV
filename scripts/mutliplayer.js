@@ -120,7 +120,7 @@ $(function(){
 					 };
 					var popup = new mapboxgl.Popup({offset:popupOffsets, closeOnClick: false});
 
-	    			var playerMarker = new mapboxgl.Marker(el).Popup(popup)
+	    			var playerMarker = new mapboxgl.Marker(el).setPopup(popup)
 	    			.setLngLat([newCenter[0], newCenter[1]])
 	    			.addTo(map);
 	    			playerMarkers[obj.publisher] = playerMarker;
