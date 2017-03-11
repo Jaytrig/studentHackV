@@ -24,8 +24,13 @@ var points = [
 {
 	name : 'New York',
 	startPoints : [ -73.990157, 40.732288],
-	// endPoint : [-73.985100, 40.747811]
-	endPoint : [ -73.990157, 40.732388]
+	endPoint : [-73.985100, 40.747811]
+	// endPoint : [ -73.990157, 40.732388]
+},
+{
+	name : 'London',
+	startPoints : [ -0.112204, 51.504149 ],
+	endPoint : [ -0.126927, 51.513773]
 }
 	]
 	function distanceTwoPoints(lat1, lon1, lat2, lon2) {
@@ -109,9 +114,9 @@ $(function(){
 	    			popup.innerHTML = obj.message.name ;
 	    			popup.className = 'popupClass';
 	    			el.className = 'markerCar';
-	    			el.appendChild(popup); 
+	    			el.appendChild(popup);
 
-	    			
+
 	    			var playerMarker = new mapboxgl.Marker(el)
 	    			.setLngLat([newCenter[0], newCenter[1]])
 	    			.addTo(map);
