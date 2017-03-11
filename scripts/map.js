@@ -1,11 +1,9 @@
 (function() {
   mapboxgl.accessToken = 'pk.eyJ1IjoibW9ydG9uZXkiLCJhIjoiY2owNGoxZm9pMDBiYzJxbmxiM2p2cG4zYSJ9.Nhvw9Lp7DZ0gXHAcoCvqiQ';
-
+  var startPoints = [-2.23834, 53.4760];
+  var endPoint = [-2.23834, 53.4760];
+  // var endPoint = [-2.243101, 53.487354]
   map = new mapboxgl.Map({
-    var startPoints = [-2.23834, 53.4760];
-    var endPoint = [-2.23834, 53.4760];
-    // var endPoint = [-2.243101, 53.487354]
-    var map = new mapboxgl.Map({
         style: 'mapbox://styles/mortoney/cj050mkjg00cf2snyrp55bjxq',
         center: startPoints,
         zoom: 19,
