@@ -11,6 +11,10 @@ var smallmapMarker;
 var endpointMarkerMap1;
 var endpointMarkerMap2;
 var point;
+var timeout = setTimeout(function() {
+	$('#notice').hide();
+	reload();
+}, 8000);
 var keyMap = {38: false, 40: false, 39: false, 37: false};
 var points = [
 	{
@@ -78,12 +82,11 @@ $(function(){
 	    		// display win message on phone screen
 	    		var winnerName = obj.message.name;
 	    		$('#notice').html(winnerName + '<br>WINS!<br>');
-	    		$('#notice').html($('#notice').html() + '<br>NEW GAME!<br>STARTS IN:<br>');
+	    		$('#notice').html($('#notice').html() + '<br>NEW GAME!<br>STARTS IN:<span id="timeleft"> 8 secs<br>');
 	    		$('#notice').show();
-				setTimeout(function(){
-					$('#notice').hide();
-					reload();
-				}, 8000);
+					setInterval(function() {
+							$('#timeleft').text( getTimeLeft(timeout) +'secs')
+					}, 1000);
 	    	}
 	    	if(userId !== obj.publisher){
 		    	var newCenter = [obj.message.lng, obj.message.lat];
