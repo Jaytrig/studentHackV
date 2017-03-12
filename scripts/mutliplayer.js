@@ -13,6 +13,7 @@ var endpointMarkerMap2;
 var point;
 var secondsCounter = 7;
 var t;
+var plane = false;
 var keyMap = {38: false, 40: false, 39: false, 37: false, 87: false, 65: false, 83: false, 68: false};
 var winner = false;
 var points = [
@@ -61,6 +62,14 @@ function reload(newPoint){
 	$('#location').text(points[newPoint].name);
 	$('#distanceTag').text(d +'KM Left');
 	winner = false;
+	plane = false;
+    $('#drivecar').css('width', '28px');
+    $('#drivecar').attr('src','/img/car-drive.png');
+    $('#drivecar').css('margin-left', '0px');
+    $('#drivecar').show();
+     map.setZoom(19);
+     var imageUrl = '/img/car.png';
+     $('#car').css('background-image', 'url(' + imageUrl + ')');
 }
 
 $(function(){

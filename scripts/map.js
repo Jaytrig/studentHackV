@@ -173,7 +173,27 @@
                   }
                   else if (keyMap[38] || keyMap[87]) {
                       $('#myValues').val(deltaDistance /2).trigger('change');
-                      $('#drivecar').show();
+                      if(deltaDistance /2 > 220 || plane){
+                        plane = true;
+                        $('#drivecar').attr('src','/img/plane.png');
+                        $('#drivecar').css('width', '100px');
+                        $('#drivecar').css('margin-left', '-30px');
+                        $('#car').css('background-image', 'none');
+                        map.setZoom(18);
+                        $('#drivecar').show();
+                      }else{
+                        $('#drivecar').css('width', '28px');
+                        $('#drivecar').attr('src','/img/car-drive.png');
+                        $('#drivecar').css('margin-left', '0px');
+                        $('#drivecar').show();
+                      }
+                      if(plane){
+                        map.panBy([0, -deltaDistance], {
+                              easing: easing
+                          });
+                          deltaDistance +=2;
+                          return false;
+                      }
                       if(!!onRoad || dataRight.includes(true) || dataLeft.includes(true) || dataFront.includes(true)){
                           map.panBy([0, -deltaDistance], {
                               easing: easing
@@ -196,7 +216,7 @@
                       map.easeTo({
                           bearing: map.getBearing() + deltaDegrees,
                           easing: easing
-                         });
+                      });
                      deltaDegrees+=2;
                      deltaDistance=30;
                   }
@@ -214,7 +234,13 @@
                   keyMap[e.keyCode] = false;
                   if(e.keyCode == 38 || e.keyCode == 65){
                       $('#myValues').val(0).trigger('change');
-                      $('#drivecar').hide();
+                      //var imageUrl = '/img/car.png';
+                      //$('#car').css('background-image', 'url(' + imageUrl + ')');
+                      //map.setZoom(19);
+                      //plane = false;
+                      if(!plane){
+                        $('#drivecar').hide();
+                      }
                   }
                   if(e.keyCode == 39 || e.keyCode == 68){
                       deltaDegrees = 5;
