@@ -139,8 +139,11 @@ body {
   height: 400px;
   margin: 0 auto;
   margin-top: 100px;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-image: url('../img/logo-bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
   position: relative;
+
 }
 
 .nameCont{
@@ -155,7 +158,8 @@ body {
   background-color:
   rgba(66, 66, 66, 0.4);
   z-index: 100;
-  position: absolute;top: 0;
+  position: absolute;
+  top: 0;
   left: 0;
 }
 
