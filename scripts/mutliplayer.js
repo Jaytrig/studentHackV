@@ -56,7 +56,7 @@ function reload(newPoint){
 	smallmapMarker.setLngLat(points[newPoint].startPoints);
 	endpointMarkerMap1.setLngLat(points[newPoint].endPoint);
 	endpointMarkerMap2.setLngLat(points[newPoint].endPoint);
-
+	secondsCounter = 7;
 	var d = distanceTwoPoints(points[newPoint].startPoints[1], points[newPoint].startPoints[0], points[newPoint].endPoint[1], points[newPoint].endPoint[0]);
 	$('#distanceTag').text(d +'KM Left '+ points[newPoint].name);
 	winner = false;
