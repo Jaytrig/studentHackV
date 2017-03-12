@@ -92,7 +92,7 @@
       var deltaDistance = 30;
 
       // degrees the map rotates when the left or right arrow is clicked
-      var deltaDegrees = 5;
+      var deltaDegrees = 2;
       var onRoad;
       var dataLeft =[];
       var dataRight= [];
@@ -172,8 +172,6 @@
                       deltaDistance=30;
                   }
                   else if (keyMap[38] || keyMap[87]) {
-                      deltaDegrees = 5
-
                       $('#myValues').val(deltaDistance /2).trigger('change');
                       $('#drivecar').show();
                       if(!!onRoad || dataRight.includes(true) || dataLeft.includes(true) || dataFront.includes(true)){
@@ -190,7 +188,7 @@
                           easing: easing
                       });
 
-                     deltaDegrees = 25
+                     deltaDegrees+=2;
                      deltaDistance=30;
 
                   }
@@ -199,7 +197,7 @@
                           bearing: map.getBearing() + deltaDegrees,
                           easing: easing
                          });
-                     deltaDegrees = 25;
+                     deltaDegrees+=2;
                      deltaDistance=30;
                   }
               }
@@ -217,6 +215,12 @@
                   if(e.keyCode == 38 || e.keyCode == 65){
                       $('#myValues').val(0).trigger('change');
                       $('#drivecar').hide();
+                  }
+                  if(e.keyCode == 39 || e.keyCode == 68){
+                      deltaDegrees = 5;
+                  }
+                  if(e.keyCode == 37 || e.keyCode == 65){
+                      deltaDegrees = 5;
                   }
               }
 

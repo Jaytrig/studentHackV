@@ -64,6 +64,12 @@ function reload(newPoint){
 }
 
 $(function(){
+		$('#username').focus();
+		$('#username').keydown(function (e){
+		    if(e.keyCode == 13){
+		        $('#join').click();
+		    }
+		})
 		toastr.options = {
             "positionClass": "toast-top-left"
         };
