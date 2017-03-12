@@ -11,6 +11,13 @@
 
 }
 
+.drivecar{
+  width: 28px;
+  height: 41;
+  margin-top: -19px;
+  display: none;
+}
+
 .roads {
     background-color: #000;
 }
