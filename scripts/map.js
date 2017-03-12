@@ -18,7 +18,8 @@
   });
 
   var d = distanceTwoPoints(points[point].startPoints[1], points[point].startPoints[0], points[point].endPoint[1], points[point].endPoint[0]);
-  $('#distanceTag').text(d +' KM Left '+ points[point].name);
+  $('#location').text(points[point].name);
+  $('#distanceTag').text(d +' KM Left');
 
 
   map2 = new mapboxgl.Map({
@@ -233,8 +234,8 @@
 
         function didUserWin(cur){
           var d = distanceTwoPoints(cur.lat.toFixed(6), cur.lng.toFixed(6), points[point].endPoint[1], points[point].endPoint[0]);
-
-          $('#distanceTag').text(d +' KM Left '+ points[point].name);
+          $('#location').text(points[point].name);
+          $('#distanceTag').text(d +' KM Left');
           if(parseFloat(d) < 0.01 && !winner){
             winner = true;
             $.ajax({
