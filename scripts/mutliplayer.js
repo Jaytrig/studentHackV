@@ -11,7 +11,7 @@ var smallmapMarker;
 var endpointMarkerMap1;
 var endpointMarkerMap2;
 var point;
-var secondCounter = 0;
+var secondsCounter = 7;
 var t;
 var keyMap = {38: false, 40: false, 39: false, 37: false, 87: false, 65: false, 83: false, 68: false};
 var winner = false;
@@ -79,6 +79,11 @@ $(function(){
         	});
 		});
 
+		function countDown(){
+			secondsCounter--;
+			$('#seconds').text('In: ' + secondsCounter);
+		}
+
 
 		playerTracking = new PubNub({
 			publishKey: 'pub-c-bdf8080e-74cc-4302-86b0-2de8ada8fdd9',
@@ -100,8 +105,10 @@ $(function(){
 	    		var thisPoint = obj.message.point;
 	    		$('#winnerText').html(winnerName + '<br>WINS!<br>NEW GAME<br>STARTS SOON!<br>');
 	    		$('#notice').show();
+	    		var t = setInterval(countDown, 1000);
 	    		setTimeout(function(){
 	    			$('#notice').hide();
+	    			clearInterval(t);
 	    			reload(thisPoint);
 	    		}, 8000);
 	    		return false;
