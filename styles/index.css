@@ -12,10 +12,9 @@
 }
 
 .drivecar{
-  width: 28px;
-  height: 41;
-  margin-top: -19px;
-  display: none;
+    width: 28px;
+    height: 41;
+    display: none;
 }
 
 .roads {
