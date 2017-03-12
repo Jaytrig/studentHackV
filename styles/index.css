@@ -23,7 +23,9 @@
 
 
 #distanceTag{
-    text-align: center;
+  position: absolute;
+  left: 60px;
+  top: 5px;
 }
 
 body {
@@ -58,7 +60,7 @@ body {
   width: 228px;
   height: 52px;
   z-index: 99;
-  background-color: lightgrey;
+  background-color: #b6e59e;
 }
 
 .marker{
@@ -210,5 +212,11 @@ body {
   position: absolute;
   z-index: 1000;
   bottom: 10px;
+  left: 10px;
+}
+
+#location{
+  position: absolute;
+  top: -16px;
   left: 10px;
 }
